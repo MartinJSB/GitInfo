@@ -4,8 +4,11 @@ import pandas as pd
 from getpass import getpass
 import matplotlib.pyplot as plt
 from tqdm import tqdm
+import pdb
 
-g = Github()
+#Workaround so I can have my private access token on github publicly
+not_so_private_token = ''.join(open('private_access_token.txt').read().splitlines())
+g = Github(not_so_private_token)
 
 if g.get_rate_limit().core.remaining < 10:
     print("Github login required for additional calls")
@@ -45,7 +48,12 @@ def pushDict(dict, key, value):
 language_loc = {}
 language_proj = {}
 
+rate_limit = g.get_rate_limit().core.remaining
 for repo in tqdm(repos, total=repos.totalCount):
+    rate_limit -= 1
+    if not rate_limit:
+        print("quitting early, rate limit was exceeded!")
+        break
     lang_obj = repo.get_languages()
     for lang in lang_obj:
         language_loc = pushDict(language_loc, lang if lang is not None else 'Other', lang_obj[lang])
