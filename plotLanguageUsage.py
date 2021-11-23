@@ -5,9 +5,7 @@ from getpass import getpass
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 
-#Not so private
-PRIVATE_TOKEN = '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'
-g = Github(PRIVATE_TOKEN)
+g = Github()
 
 if g.get_rate_limit().core.remaining < 10:
     print("Github login required for additional calls")
