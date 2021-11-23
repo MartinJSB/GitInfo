@@ -1,8 +1,6 @@
 from github import Github
 from pprint import pprint
 import pandas as pd
-import json
-import pdb
 from getpass import getpass
 import matplotlib.pyplot as plt
 from tqdm import tqdm
