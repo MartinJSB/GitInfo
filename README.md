@@ -12,7 +12,7 @@ matplotlib
 
 tqdm
 
-Run the file
+Run the file:
 
 python plotLanguageUsage.py
 
